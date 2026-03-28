@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+    <div class="row mt-4 justify-content-center">
+        <div class="col-6 text-center">
+            <div class="alert alert-danger" role="alert">
+                <p>Houve algum problema com o processamento da sua requisição. Verifique se informou de maneira correta a URL enviada por e-mail. <a href="{% url "registro:pre_registro" %}">Clique aqui</a> para voltar à página de pré-registro.</p>
+            </div>
+        </div>
+    </div>
+{% endblock conteudo %}

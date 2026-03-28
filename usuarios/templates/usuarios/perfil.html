@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+    <h1>Perfil de {{ user.username }}</h1>
+    <hr>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        {% if erros %}
+            {% for erro in erros %}
+                <div class="row my-1 justify-content-center">
+                    <div class="col-6 text-center alert alert-danger" role="alert">
+                        <p>O seguinte campo é obrigatório: {{ erro }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Nome de usuário e e-mail -->
+        <div class="row justify-content-center mt-1">
+            <div class="col-3">
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        name="nome_de_usuario"
+                        id="nome_de_usuario"
+                        class="form-control"
+                        value="{{ user.username }}"
+                        placeholder="Nome de Usuário"
+                        disabled>
+                        <label for="nome_de_usuario" class="form-label">Nome de Usuário</label>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-floating">
+                    <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        class="form-control"
+                        value="{{ user.email }}"
+                        placeholder="E-mail"
+                        disabled>
+                        <label for="nome_de_usuario" class="form-label">E-mail</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nome e Sobrenome -->
+        <div class="row justify-content-center mt-1">
+            <div class="col-3">
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        name="nome"
+                        id="nome"
+                        class="form-control"
+                        value="{{ user.first_name }}"
+                        placeholder="Nome">
+                        <label for="nome" class="form-label">Nome</label>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        name="sobrenome"
+                        id="sobrenome"
+                        class="form-control"
+                        value="{{ user.last_name }}"
+                        placeholder="Sobrenome"
+                        required>
+                        <label for="sobrenome" class="form-label">Sobrenome</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data de Nascimento e Gênero -->
+        <div class="row justify-content-center mt-1">
+            <div class="col-3">
+                <div class="form-floating">
+                    <input
+                        type="date"
+                        name="data_de_nascimento"
+                        id="data_de_nascimento"
+                        class="form-control"
+                        value="{{ user.perfil.data_nascimento|date:"Y-m-d" }}"
+                        placeholder="Data de Nascimento">
+                        <label for="data_de_nascimento" class="form-label">Data de Nascimento</label>
+                </div>
+            </div>
+            <div class="col-3">
+                <select name="genero" class="form-select" aria-label="Gênero do usuário">
+                    {% for chave, genero in generos %}
+                        <option
+                            value="{{ chave }}" {% if chave == user.perfil.genero %}selected{% endif %}>{{ genero }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <!-- Data de Nascimento e Gênero -->
+        <div class="row justify-content-center mt-1">
+            <div class="col-6">
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        name="endereco"
+                        id="endereco"
+                        class="form-control"
+                        value="{{ user.perfil.endereco }}"
+                        placeholder="Endereço"
+                        required>
+                        <label for="endereco" class="form-label">Endereço</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 justify-content-center">
+            <div class="col-3 d-grid">
+                <button type="submit" class="btn btn-success">Enviar</button>
+            </div>
+        </div>
+    </form>
+{% endblock conteudo %}

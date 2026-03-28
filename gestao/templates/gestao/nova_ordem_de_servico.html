@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+    <div class="row mt-3 justify-content-center">
+        <div class="col text-center">
+            <h2>Nova ordem de serviço</h2>
+        </div>
+    </div>
+    <hr>
+    
+    <form action="" method="POST">
+
+        {% csrf_token %}
+
+        <div class="row mt-3 justify-content-center">
+            <div class="col-6">
+                <div class="form-floating">
+                    <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Título" required>
+                    <label for="titulo" class="form-label">Título</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 justify-content-center">
+            <div class="col-6">
+                <div class="form-floating">
+                    <textarea name="descricao" id="descricao" rows="30" class="form-control" placeholder="Descrição" required></textarea>
+                    <label for="descricao" class="form-label">Descrição</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-2 justify-content-center">
+            <div class="col-3 d-grid">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </div>
+    </form>
+{% endblock conteudo %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="row mt-4 justify-content-center">
+                <div class="border col-8 text-center alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    <strong>{{ message }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>    
+        {% endfor %}
+    {% endif %}
+
+    <div class="row mt-3 justify-content-center">
+        <div class="border col-2 text-center">
+            <h5>Título</h5>
+        </div>
+        <div class="border col-2 text-center">
+            <h5>Data de criação</h5>
+        </div>
+        <div class="border col-2 text-center">
+            <h5>Responsável</h5>
+        </div>
+        <div class="border col-2 text-center">
+            <h5>Status</h5>
+        </div>
+        {% if perms.gestao.pode_visualizar_todas_os %}
+            <div class="border col-2 text-center">
+                <h5>Cliente</h5>
+            </div>
+        {% endif %}
+    </div>
+
+    {% for os in ordens_de_servico %}
+        <div class="row justify-content-center my-1">
+            <div class="col-2 text-center">
+                <p><a href="{% url "gestao:detalhe_ordem_de_servico" os.pk %}">{{ os.titulo }}</a></p>
+            </div>
+            <div class="col-2 text-center">
+                <p>{{ os.data_de_criacao|date:'H:i:s d/m/Y' }}</p>
+            </div>
+            <div class="col-2 text-center">
+                <p>{{ os.tecnico|default_if_none:"Não atribuído" }}</p>
+            </div>
+            <div class="col-2 text-center">
+                <p>{{ os.get_status_display }}</p>
+            </div>
+            {% if perms.gestao.pode_visualizar_todas_os %}
+                <div class="col-2 text-center">
+                    <h5>{{ os.cliente }}</h5>
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+{% endblock conteudo %}

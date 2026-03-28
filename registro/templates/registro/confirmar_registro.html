@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+    <div class="row my-2">
+        <div class="col text-center">
+            <h3>Confirmação de registro</h3>
+        </div>
+    </div>
+
+    {% if messages %}
+        <div class="row mt-3 justify-content-center">
+            <div class="col-8">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <ul class="list-unstyled">
+                        {% for message in messages %}
+                            <li class="d-flex justify-content-center">
+                                {{ message }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <button class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="row justify-content-center">
+            <div class="col-3">
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        name="nome"
+                        id="nome"
+                        class="form-control"
+                        placeholder="Nome"
+                        required>
+                    <label for="nome">Nome</label>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        name="sobrenome"
+                        id="sobrenome"
+                        class="form-control"
+                        placeholder="Sobrenome"
+                        required>
+                    <label for="sobrenome">Sobrenome</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-3">
+            <div class="col-3">
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        name="nome_de_usuario"
+                        id="nome_de_usuario",
+                        class="form-control"
+                        placeholder="Nome de usuário"
+                        required>
+                    <label for="nome_de_usuario">Nome de Usuário</label>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="form-floating">
+                    <input
+                        type="email"
+                        name="email"
+                        id="email",
+                        class="form-control"
+                        placeholder="E-mail"
+                        value="{{ pre_registro.email }}"
+                        disabled>
+                    <label for="email">E-mail</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 justify-content-center">
+            <div class="col-3">
+                <div class="form-floating">
+                    <input
+                        type="password"
+                        name="senha"
+                        id="senha",
+                        class="form-control"
+                        placeholder="Senha"
+                        required>
+                    <label for="senha">Senha</label>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="form-floating">
+                    <input
+                        type="password"
+                        name="confirmar_senha"
+                        id="confirmar_senha",
+                        class="form-control"
+                        placeholder="Confirmar Senha"
+                        required>
+                    <label for="confirmar_senha">Confirmar Senha</label>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" name="email" value="{{ pre_registro.email }}">
+
+        <div class="row mt-2 justify-content-center">
+            <div class="col-6 d-grid">
+                <button type="submit" class="btn btn-primary">Confirmar</button>
+            </div>
+        </div>
+    </form>
+{% endblock conteudo %}

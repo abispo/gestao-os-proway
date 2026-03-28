@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+    <div class="row mt-4 justify-content-center">
+        <div class="col-6 text-center">
+            <div class="alert alert-danger" role="alert">
+                <p>O seu pré-registro está expirado. Há um limite de 24h para confirmação do registro. <a href="{% url "registro:pre_registro" %}">Clique aqui</a> para voltar à página de pré-registro.</p>
+            </div>
+        </div>
+    </div>
+{% endblock conteudo %}
