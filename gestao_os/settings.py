@@ -87,13 +87,7 @@ WSGI_APPLICATION = 'gestao_os.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url(
-        default='postgresql://{user}:{password}@{host}:{port}/{database_name}'.format(
-            user=os.getenv("DB_USER"),
-            password=os.getenv("DB_PASSWORD"),
-            host=os.getenv("DB_HOST"),
-            port=os.getenv("DB_PORT"),
-            database_name=os.getenv("DB_NAME")
-        )
+        default=os.getenv("DATABASE_URL")
     )
 }
 
